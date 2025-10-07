@@ -20,14 +20,14 @@ export class Messenger extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => {
-      let randIdx = Math.floor(Math.random() * messages.length);
+    // this.interval = setInterval(() => {
+    //   let randIdx = Math.floor(Math.random() * messages.length);
 
-      this.setState({
-        messages: this.state.messages.concat({ author: 'Автор', text: messages[randIdx] })
-      })
+    //   this.setState({
+    //     messages: this.state.messages.concat({ author: 'Автор', text: messages[randIdx] })
+    //   })
 
-    }, 2000)
+    // }, 2000)
   }
 
   componentDidUpdate() {
@@ -41,15 +41,19 @@ export class Messenger extends Component {
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
+
+  handleSend = (message) => this.setState({
+    messages: this.state.messages.concat(message)
+  });
 
   render() {
     return (
       <div>
+        <MessageForm onSend={this.handleSend} />
         <MessagesList messages={this.state.messages} />
-        {/* <MessageForm /> */}
       </div>
     )
   }
