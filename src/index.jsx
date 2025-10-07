@@ -7,7 +7,8 @@
 import React from "react";
 import { createRoot } from 'react-dom/client';
 
-import { App } from 'components/App';
+// import { App } from 'components/App';
+import { Messenger } from 'components/Messenger';
 
 // const element = React.createElement(
 //   'h1',
@@ -31,4 +32,4 @@ const root = createRoot(document.getElementById('root'));
 // root.render(element);
 // root.render(<Message msg={'Привет, компонент работает!)'} />);
 // root.render(<Messages messages={messages} />);
-root.render(<App />);
+root.render(<Messenger />);
