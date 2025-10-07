@@ -1,13 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 
 export class MessageForm extends Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       author: '',
       text: ''
-    }
+    };
+
   }
+
+  // static propTypes = {
+  //   onSend: PropTypes.functi
+  // };
+
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +26,7 @@ export class MessageForm extends Component {
   }
 
   sendMessage = () => {
-    const {onSend}=this.props;
+    const { onSend } = this.props;
     if (typeof onSend === 'function') {
       onSend(this.state);
       this.setState({ text: '' });
