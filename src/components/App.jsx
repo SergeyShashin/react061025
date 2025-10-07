@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
+import { Counter } from 'components/Counter';
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0
+      idVisible: false
     };
   }
 
-  handleClick = (e) => {
-    const operation = Number(e.target.dataset.operation);
-    this.setState(prevState => ({ counter: prevState.counter + operation }));
+  handleClick = () => {
+    this.setState(prevState => ({ isVisible: !prevState.isVisible }));
   }
 
   render() {
-    const { counter } = this.state;
+    const { isVisible } = this.state;
     return (
       <div>
         <h2>Привет из App!!!</h2>
-        <button data-operation='-1' onClick={this.handleClick}>-</button>
-        <span>{counter}</span>
-        <button data-operation='1' onClick={this.handleClick}>+</button>
+        <button onClick={this.handleClick}>Click</button>
+        {isVisible && <Counter />}
+
       </div>
     )
   }
