@@ -1,3 +1,5 @@
+import './Messenger.css';
+
 import React, { Component } from 'react';
 import { MessagesList } from 'components/MessagesList';
 import { MessageForm } from 'components/MessageForm';
@@ -51,7 +53,7 @@ export class Messenger extends Component {
 
   render() {
     return (
-      <div>
+      <div className='messenger'>
         <MessageForm onSend={this.handleSend} />
         <MessagesList messages={this.state.messages} />
       </div>

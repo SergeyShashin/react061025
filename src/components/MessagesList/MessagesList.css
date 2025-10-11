@@ -1,0 +1,5 @@
+.messagesList{
+  background: beige;
+  overflow-y: scroll;
+  height: 99vh;
+}
