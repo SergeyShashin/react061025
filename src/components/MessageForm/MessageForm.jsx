@@ -18,7 +18,7 @@ export class MessageForm extends Component {
   // };
 
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
@@ -33,12 +33,16 @@ export class MessageForm extends Component {
     }
   }
 
+  handleCtrlEnter = e => {
+    e.ctrlKey && e.keyCode === 13 ? this.sendMessage() : '';
+  }
+
   render() {
     const { author, text } = this.state;
     return (
       <div>
         <input name='author' placeholder='author' onChange={this.handleInputChange} value={author} />
-        <input name='text' placeholder='text' onChange={this.handleInputChange} value={text} />
+        <input name='text' placeholder='text' onChange={this.handleInputChange} value={text} onKeyDown={this.handleCtrlEnter} />
         <button onClick={this.sendMessage}>Send</button>
       </div>
     )

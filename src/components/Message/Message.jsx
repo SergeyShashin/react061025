@@ -26,8 +26,8 @@ export class Message extends Component {
       // }
       // }>
       <div className={classes}>
-        <p>{author}:</p>
-        <p className='sender'>{text}</p>
+        <p>{text}</p>
+        <p className='message-sender'>{author}</p>
       </div >
 
     )
