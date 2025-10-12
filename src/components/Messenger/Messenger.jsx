@@ -1,4 +1,5 @@
 import './Messenger.css';
+import 'assets/globalcss';
 
 import React, { Component } from 'react';
 import { MessagesList } from 'components/MessagesList';
