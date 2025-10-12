@@ -1,0 +1,13 @@
+input, button{
+  background: none;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid lightseagreen;
+  color: crimson;
+}
+
+button:hover{
+  background: lightseagreen;
+  border-radius: 10px;
+}
