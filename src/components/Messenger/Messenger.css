@@ -5,4 +5,23 @@
 
 .messenger {
   background: beige;
+  color: crimson;
+}
+
+.header {
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.chatsAndFormAndList {
+  display: flex;
+}
+
+.chats{
+  width: 30%;
+  padding: 10px;
+}
+
+.formAndList{
+  width: 70%;
 }

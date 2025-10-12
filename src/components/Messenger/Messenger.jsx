@@ -1,5 +1,5 @@
 import './Messenger.css';
-import 'assets/globalcss';
+import 'assets/global.css';
 
 import React, { Component } from 'react';
 import { MessagesList } from 'components/MessagesList';
@@ -55,8 +55,19 @@ export class Messenger extends Component {
   render() {
     return (
       <div className='messenger'>
-        <MessageForm onSend={this.handleSend} />
-        <MessagesList messages={this.state.messages} />
+        <div className='header'>Header</div>
+        <div className='chatsAndFormAndList'>
+          <div className='chats'>
+            <p>Чат1</p>
+            <p>Чат2</p>
+            <p>Чат3</p>
+          </div>
+          <div className='formAndList'>
+            <MessageForm onSend={this.handleSend} />
+            <MessagesList messages={this.state.messages} />
+          </div>
+        </div>
+
       </div>
     )
   }
