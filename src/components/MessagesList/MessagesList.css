@@ -1,5 +1,6 @@
-.messagesList{
-  background: beige;
+.messagesList {
   overflow-y: scroll;
   height: 99vh;
+  display: flex;
+  flex-direction: column;
 }
