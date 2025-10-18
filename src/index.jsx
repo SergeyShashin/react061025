@@ -9,6 +9,9 @@ import { createRoot } from 'react-dom/client';
 
 // import { App } from 'components/App';
 import { Messenger } from 'components/Messenger';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './routes.js';
+import { routes } from "./routes.js";
 
 // const element = React.createElement(
 //   'h1',
@@ -32,4 +35,18 @@ const root = createRoot(document.getElementById('root'));
 // root.render(element);
 // root.render(<Message msg={'Привет, компонент работает!)'} />);
 // root.render(<Messages messages={messages} />);
-root.render(<Messenger />);
+root.render(
+  // <BrowserRouter>
+  //   <Routes>
+  //     {routes.map((route, idx) => <Route key={idx} {...route} />)}
+  //   </Routes>
+  //   {/* <Messenger /> */}
+  // </BrowserRouter>
+
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Messenger />} />
+      <Route path='/chats/:id' element={<Messenger />} />
+    </Routes>
+  </BrowserRouter>,
+);

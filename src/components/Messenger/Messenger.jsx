@@ -4,6 +4,7 @@ import 'assets/global.css';
 import React, { Component } from 'react';
 import { MessagesList } from 'components/MessagesList';
 import { MessageForm } from 'components/MessageForm';
+import { Link } from 'react-router-dom';
 
 const messages = [
   'Привет друг!)',
@@ -53,14 +54,21 @@ export class Messenger extends Component {
   });
 
   render() {
+    console.log(this.props);
     return (
       <div className='messenger'>
         <div className='header'>Header</div>
         <div className='chatsAndFormAndList'>
           <div className='chats'>
-            <p>Чат1</p>
-            <p>Чат2</p>
-            <p>Чат3</p>
+            <Link to='/chats/1'>
+              <p>Чат1</p>
+            </Link>
+            <Link to='/chats/2'>
+              <p>Чат2</p>
+            </Link>
+            <Link to='/chats/3'>
+              <p>Чат3</p>
+            </Link>
           </div>
           <div className='formAndList'>
             <MessageForm onSend={this.handleSend} />
