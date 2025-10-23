@@ -19,6 +19,20 @@ export class Messenger extends Component {
     super(props);
     this.state = {
       messages: [{ author: 'Автоответчик', text: `Привет, друг!)` }],
+      chats: {
+        1: {
+          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат ${this.chatName}` }],
+          chatName: '1',
+        },
+        2: {
+          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат ${this.chatName}` }],
+          chatName: '2',
+        },
+        3: {
+          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат ${this.chatName}` }],
+          chatName: '3',
+        },
+      },
       currentChat: '',
     };
     this.interval = 0;
@@ -40,9 +54,10 @@ export class Messenger extends Component {
     const { messages } = this.state;
     const { author } = messages[messages.length - 1];
     if (author === 'Автор') {
-      setTimeout(() => this.setState({
-        messages: messages.concat({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` })
-      }), 1000);
+      // setTimeout(() => this.setState({
+      //   messages: messages.concat({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` })
+      // }), 1000);
+      setTimeout(() => this.handleSend({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` }), 1000);
 
     }
   }
@@ -51,17 +66,24 @@ export class Messenger extends Component {
   //   clearInterval(this.interval);
   // }
 
-  handleSend = (message) => this.setState({
-    messages: this.state.messages.concat(message)
-  });
+  handleSend = (message) => {
+    const { chats, currentChat} = this.state;
+    const {messages}=chats[currentChat];
+    console.log(chats);
+    console.log(messages);
+    this.setState({
+      messages: this.state.messages.concat(message)
+    });
+    // this.setState({
+    //   [chats]: this.state.messages.concat(message)
+    // });
+  };
 
   handleSendChatID = chatID => {
-    console.log(chatID);
     this.setState({ currentChat: chatID });
   }
 
   render() {
-    console.log(this.props);
     const { currentChat } = this.state;
     return (
       <div className='messenger'>
