@@ -4,7 +4,8 @@ import 'assets/global.css';
 import React, { Component } from 'react';
 import { MessagesList } from 'components/MessagesList';
 import { MessageForm } from 'components/MessageForm';
-import { Link } from 'react-router-dom';
+import { Chats } from 'components/Chats';
+import { ChatNotSelect } from 'components/ChatNotSelect';
 
 const messages = [
   'Привет друг!)',
@@ -17,7 +18,8 @@ export class Messenger extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [{ author: 'Автор', text: 'Привет, друг!)' }]
+      messages: [{ author: 'Автоответчик', text: `Привет, друг!)` }],
+      currentChat: '',
     };
     this.interval = 0;
 
@@ -53,26 +55,22 @@ export class Messenger extends Component {
     messages: this.state.messages.concat(message)
   });
 
+  handleSendChatID = chatID => {
+    console.log(chatID);
+    this.setState({ currentChat: chatID });
+  }
+
   render() {
     console.log(this.props);
+    const { currentChat } = this.state;
     return (
       <div className='messenger'>
         <div className='header'>Header</div>
         <div className='chatsAndFormAndList'>
-          <div className='chats'>
-            <Link to='/chats/1'>
-              <p>Чат1</p>
-            </Link>
-            <Link to='/chats/2'>
-              <p>Чат2</p>
-            </Link>
-            <Link to='/chats/3'>
-              <p>Чат3</p>
-            </Link>
-          </div>
+          <Chats sendChatID={this.handleSendChatID} />
           <div className='formAndList'>
-            <MessageForm onSend={this.handleSend} />
-            <MessagesList messages={this.state.messages} />
+            {currentChat && <MessageForm onSend={this.handleSend} />}
+            {currentChat && <MessagesList messages={this.state.messages} />}
           </div>
         </div>
 
