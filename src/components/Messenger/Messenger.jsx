@@ -18,18 +18,17 @@ export class Messenger extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [{ author: 'Автоответчик', text: `Привет, друг!)` }],
       chats: {
         1: {
-          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат ${this.chatName}` }],
+          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат 1.` }],
           chatName: '1',
         },
         2: {
-          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат ${this.chatName}` }],
+          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат 2.` }],
           chatName: '2',
         },
         3: {
-          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат ${this.chatName}` }],
+          messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат 3.` }],
           chatName: '3',
         },
       },
@@ -51,15 +50,15 @@ export class Messenger extends Component {
   }
 
   componentDidUpdate() {
-    const { messages } = this.state;
-    const { author } = messages[messages.length - 1];
-    if (author === 'Автор') {
-      // setTimeout(() => this.setState({
-      //   messages: messages.concat({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` })
-      // }), 1000);
-      setTimeout(() => this.handleSend({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` }), 1000);
+    // const { messages } = this.state;
+    // const { author } = messages[messages.length - 1];
+    // if (author === 'Автор') {
+    // setTimeout(() => this.setState({
+    //   messages: messages.concat({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` })
+    // }), 1000);
+    // setTimeout(() => this.handleSend({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` }), 1000);
 
-    }
+    // }
   }
 
   // componentWillUnmount() {
@@ -67,14 +66,20 @@ export class Messenger extends Component {
   // }
 
   handleSend = (message) => {
-    const { chats, currentChat } = this.state;
+    console.log(message);
+    // console.log(this.state['chats'][this.state.currentChat]['messages']);
+    const {currentChat } = this.state;
+    const chats = Object.create(this.state.chats);
     const { messages } = chats[currentChat];
-    this.setState({
-    messages: this.state.messages.concat(message)
-    });
+    console.log(chats);
+    // console.log(messages);
     // this.setState({
-    //   chats: Object.assign(chats[currentChat], messages.concat(message))
+    //   messages: this.state.messages.concat(message)
     // });
+    Object.assign(chats[currentChat], messages.concat(message))
+    this.setState({
+      chats: chats
+    });
   };
 
   handleSendChatID = chatID => {
@@ -82,7 +87,20 @@ export class Messenger extends Component {
   }
 
   render() {
-    const { messages, currentChat } = this.state;
+    const { currentChat } = this.state;
+
+    let messages = [];
+
+    if (currentChat) {
+      messages = messages.concat(...this.state['chats'][currentChat]['messages']);
+    }
+
+    if (!currentChat) {
+      messages.push({ author: 'Автоответчик', text: `Здравствуйте. Можете выбрать чат.` });
+    }
+    // console.log(currentChat);
+    // console.log(messages);
+
 
     return (
       <div className='messenger'>
@@ -91,8 +109,8 @@ export class Messenger extends Component {
           <Chats sendChatID={this.handleSendChatID} />
           <div className='formAndList'>
             {currentChat && <MessageForm onSend={this.handleSend} />}
-            {currentChat && <MessagesList messages={this.state.messages} />}
-          </div>         
+            {currentChat && messages && <MessagesList messages={messages} />}
+          </div>
         </div>
 
       </div>
