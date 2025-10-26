@@ -50,15 +50,15 @@ export class Messenger extends Component {
   }
 
   componentDidUpdate() {
-    // const { messages } = this.state;
-    // const { author } = messages[messages.length - 1];
-    // if (author === 'Автор') {
+    const { messages } = this.state.chats[this.state.currentChat];
+    const { author } = messages[messages.length - 1];
+    if (author !== 'Автоответчик') {
     // setTimeout(() => this.setState({
     //   messages: messages.concat({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` })
     // }), 1000);
-    // setTimeout(() => this.handleSend({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` }), 1000);
+    setTimeout(() => this.handleSend({ author: 'Автоответчик', text: `Здравствуйте, ${author}!) Сообщение получено.` }), 1000);
 
-    // }
+    }
   }
 
   // componentWillUnmount() {
@@ -66,17 +66,14 @@ export class Messenger extends Component {
   // }
 
   handleSend = (message) => {
-    console.log(message);
-    // console.log(this.state['chats'][this.state.currentChat]['messages']);
-    const {currentChat } = this.state;
-    const chats = Object.create(this.state.chats);
+    const { currentChat } = this.state;
+    const chats = {};
+    Object.assign(chats, this.state.chats);
     const { messages } = chats[currentChat];
-    console.log(chats);
-    // console.log(messages);
     // this.setState({
     //   messages: this.state.messages.concat(message)
     // });
-    Object.assign(chats[currentChat], messages.concat(message))
+    Object.assign(chats[currentChat]['messages'], messages.concat(message));
     this.setState({
       chats: chats
     });
@@ -98,9 +95,6 @@ export class Messenger extends Component {
     if (!currentChat) {
       messages.push({ author: 'Автоответчик', text: `Здравствуйте. Можете выбрать чат.` });
     }
-    // console.log(currentChat);
-    // console.log(messages);
-
 
     return (
       <div className='messenger'>
