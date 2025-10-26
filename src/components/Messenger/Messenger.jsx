@@ -7,12 +7,12 @@ import { MessageForm } from 'components/MessageForm';
 import { Chats } from 'components/Chats';
 import { ChatNotSelect } from 'components/ChatNotSelect';
 
-const messages = [
-  'Привет друг!)',
-  'Как дела?',
-  'Как погода?',
-  'Как настроение?',
-];
+// const messages = [
+//   'Привет друг!)',
+//   'Как дела?',
+//   'Как погода?',
+//   'Как настроение?',
+// ];
 
 export class Messenger extends Component {
   constructor(props) {
@@ -67,15 +67,13 @@ export class Messenger extends Component {
   // }
 
   handleSend = (message) => {
-    const { chats, currentChat} = this.state;
-    const {messages}=chats[currentChat];
-    console.log(chats);
-    console.log(messages);
+    const { chats, currentChat } = this.state;
+    const { messages } = chats[currentChat];
     this.setState({
-      messages: this.state.messages.concat(message)
+    messages: this.state.messages.concat(message)
     });
     // this.setState({
-    //   [chats]: this.state.messages.concat(message)
+    //   chats: Object.assign(chats[currentChat], messages.concat(message))
     // });
   };
 
@@ -84,7 +82,8 @@ export class Messenger extends Component {
   }
 
   render() {
-    const { currentChat } = this.state;
+    const { messages, currentChat } = this.state;
+
     return (
       <div className='messenger'>
         <div className='header'>Header</div>
@@ -93,7 +92,7 @@ export class Messenger extends Component {
           <div className='formAndList'>
             {currentChat && <MessageForm onSend={this.handleSend} />}
             {currentChat && <MessagesList messages={this.state.messages} />}
-          </div>
+          </div>         
         </div>
 
       </div>
