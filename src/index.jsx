@@ -9,9 +9,11 @@ import { createRoot } from 'react-dom/client';
 
 // import { App } from 'components/App';
 import { Messenger } from 'components/Messenger';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './routes.js';
 import { routes } from "./routes.js";
+import { Provider } from 'react-redux';
+import {store} from './store.js';
 
 // const element = React.createElement(
 //   'h1',
@@ -43,10 +45,12 @@ root.render(
   //   {/* <Messenger /> */}
   // </BrowserRouter>
 
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Messenger />} />
-      <Route path='/chats/:id' element={<Messenger />} />
-    </Routes>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Messenger />} />
+        <Route path='/chats/:id' element={<Messenger />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );
