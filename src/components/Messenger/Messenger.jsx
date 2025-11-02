@@ -20,14 +20,17 @@ export class Messenger extends Component {
     this.state = {
       chats: {
         1: {
+          id: 1,
           messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат 1.` }],
           chatName: '1',
         },
         2: {
+          id: 2,
           messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат 2.` }],
           chatName: '2',
         },
         3: {
+          id: 3,
           messages: [{ author: 'Автоответчик', text: `Привет, друг!). Это чат 3.` }],
           chatName: '3',
         },
